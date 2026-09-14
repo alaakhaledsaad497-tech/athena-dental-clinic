@@ -1,3 +1,12 @@
+// =========================================================
+// Google Analytics event tracking
+// =========================================================
+function trackAthenaEvent(eventName, params = {}) {
+    if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, params);
+    }
+}
+
 // Smooth Scroll
 
 const links = document.querySelectorAll('a[href^="#"]');
@@ -63,6 +72,8 @@ window.addEventListener("load", function() {
 const header = document.querySelector("header");
 
 window.addEventListener("scroll", function() {
+
+    if (!header) return;
 
     if (window.scrollY > 30) {
         header.classList.add("scrolled");
@@ -345,17 +356,21 @@ function changeLanguage(language) {
 
 const languageBtn = document.getElementById("languageBtn");
 
-languageBtn.addEventListener("click", function() {
+if (languageBtn) {
+    languageBtn.addEventListener("click", function() {
 
-    const currentLanguage = document.documentElement.lang;
+        const currentLanguage = document.documentElement.lang;
 
-    if (currentLanguage === "en") {
-        changeLanguage("ar");
-    } else {
-        changeLanguage("en");
-    }
+        if (currentLanguage === "en") {
+            changeLanguage("ar");
+        } else {
+            changeLanguage("en");
+        }
 
-});
+        // Keep the chatbot language in sync with the page.
+        document.dispatchEvent(new CustomEvent("athenaLanguageChanged"));
+    });
+}
 
 
 // Remember the user's language choice
@@ -368,6 +383,46 @@ if (savedLanguage === "ar") {
     changeLanguage("en");
 }
 
+
+// =========================================================
+// Google Analytics — website interaction tracking
+// =========================================================
+document.addEventListener("click", function(event) {
+    const link = event.target.closest("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href") || "";
+    const isBooking = link.classList.contains("book-btn") ||
+                      link.classList.contains("main-btn") ||
+                      link.classList.contains("mobile-book-btn") ||
+                      link.getAttribute("data-key") === "bookAppointment" ||
+                      link.getAttribute("data-key") === "heroBook" ||
+                      link.getAttribute("data-key") === "mobileBook";
+
+    if (href.startsWith("https://wa.me/")) {
+        trackAthenaEvent("whatsapp_click", {
+            link_location: isBooking ? "booking" : "contact"
+        });
+    }
+
+    if (href.startsWith("tel:")) {
+        trackAthenaEvent("phone_click", {
+            link_location: link.closest("#contact") ? "contact" : "other"
+        });
+    }
+
+    if (href.includes("google.com/maps")) {
+        trackAthenaEvent("maps_click", {
+            link_location: link.classList.contains("location-icon") ? "contact_location" : "google_reviews"
+        });
+    }
+
+    if (isBooking) {
+        trackAthenaEvent("booking_click", {
+            button_text: (link.textContent || "").trim()
+        });
+    }
+});
 
 /* =========================================================
    ATHENA SMART CHATBOT — ADD-ON ONLY
@@ -478,6 +533,7 @@ if (savedLanguage === "ar") {
     }
 
     function handleAction(action){
+        trackAthenaEvent("chatbot_action", { action: action });
         const replies={
             services:{user:t("userServices"),reply:t("serviceReply"),section:"services"},
             booking:{user:t("userBooking"),reply:t("bookingReply"),link:`<a href="${whatsappUrl}" target="_blank" rel="noopener">${t("bookingLink")} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`},
@@ -523,6 +579,7 @@ if (savedLanguage === "ar") {
     }
 
     function openChat(){
+        trackAthenaEvent("chatbot_open");
         panel.classList.add("open");panel.setAttribute("aria-hidden","false");toggle.classList.add("open");
         if(!openedOnce){openedOnce=true;setTimeout(()=>addBotReply(t("hello"),false),200)}
         setTimeout(()=>{if(input)input.focus()},320);
@@ -548,5 +605,7 @@ if (savedLanguage === "ar") {
             syncChatLanguage();
         };
     }
+
+    document.addEventListener("athenaLanguageChanged", syncChatLanguage);
     syncChatLanguage();
 })();
