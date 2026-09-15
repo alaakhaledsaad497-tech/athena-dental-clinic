@@ -10,6 +10,7 @@
         gtag('js', new Date());
         gtag('config', 'G-LR4R2WL8JP');
     </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -59,10 +60,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 
     <link rel="stylesheet" href="style.css">
 
@@ -246,7 +247,7 @@
             </div>
 
             <div class="why-card reveal">
-               <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <h3 data-key="why4Title">04 — Natural Results</h3>
                 <p data-key="why4Text">Healthy, functional and naturally beautiful.</p>
             </div>
@@ -397,13 +398,14 @@
                 9th District, El Shorouk City, Cairo, next to Dover School.
             </span>
 
-            <a href="https://www.google.com/maps/place/Athena+Dental+Clinic/@30.1696288,31.5968089,17z"
-                target="_blank"
-                class="location-icon"
-                aria-label="Open Athena Dental Clinic location on Google Maps"
-                title="Open Location on Google Maps">
-                <i class="fa-solid fa-location-dot"></i>
-            </a>
+           <a href="https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="location-icon"
+    aria-label="Open Athena Dental Clinic location on Google Maps"
+    title="Open Location on Google Maps">
+    <i class="fa-solid fa-location-dot"></i>
+</a>
 
             <hr>
 
@@ -437,9 +439,9 @@
     </section>
 
 
-
     <!-- Athena Smart Chatbot -->
     <div class="athena-chatbot" id="athenaChatbot">
+
         <button class="chatbot-toggle" id="chatbotToggle" type="button" aria-label="Open Athena Assistant">
             <span class="chatbot-icon"><i class="fa-solid fa-message"></i></span>
             <span class="chatbot-pulse"></span>
@@ -447,77 +449,120 @@
         </button>
 
         <div class="chatbot-panel" id="chatbotPanel" aria-hidden="true">
+
             <div class="chatbot-header">
+
                 <div class="chatbot-brand">
-                    <div class="chatbot-avatar"><i class="fa-solid fa-tooth"></i></div>
+
+                    <div class="chatbot-avatar">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+
                     <div>
                         <strong data-chat="assistantName">Athena Assistant</strong>
-                        <span><i class="fa-solid fa-circle"></i> <span data-chat="online">Online</span></span>
+                        <span>
+                            <i class="fa-solid fa-circle"></i>
+                            <span data-chat="online">Online</span>
+                        </span>
                     </div>
+
                 </div>
+
                 <div class="chatbot-head-actions">
+
                     <button type="button" id="chatbotClear" aria-label="Clear chat" title="Clear chat">
                         <i class="fa-solid fa-rotate-right"></i>
                     </button>
+
                     <button type="button" id="chatbotClose" aria-label="Close chat" title="Close chat">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
+
                 </div>
+
             </div>
 
+
             <div class="chatbot-welcome">
-                <span class="chatbot-welcome-badge"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+
+                <span class="chatbot-welcome-badge">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+
                 <div>
                     <strong data-chat="welcomeTitle">How can we help?</strong>
                     <p data-chat="welcomeText">Ask me about our services, location, or booking an appointment.</p>
                 </div>
+
             </div>
+
 
             <div class="chatbot-messages" id="chatbotMessages" aria-live="polite"></div>
 
             <div class="chatbot-quick-title" data-chat="quickTitle">Quick options</div>
+
             <div class="chatbot-quick-actions" id="chatbotQuickActions">
+
                 <button type="button" data-action="services">
-                    <i class="fa-solid fa-tooth"></i><span data-chat="services">Our Services</span>
+                    <i class="fa-solid fa-tooth"></i>
+                    <span data-chat="services">Our Services</span>
                 </button>
+
                 <button type="button" data-action="booking">
-                    <i class="fa-regular fa-calendar-check"></i><span data-chat="booking">Book Appointment</span>
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span data-chat="booking">Book Appointment</span>
                 </button>
-               <a
-    href="https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Clinic Location"
-    class="location-btn"
->
-    <i class="fa-solid fa-location-dot"></i>
-    <span data-chat="location">Clinic Location</span>
-</a>
+
+                <a
+                    href="https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="chatbot-location-btn"
+                    aria-label="Clinic Location"
+                >
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span data-chat="location">Clinic Location</span>
+                </a>
+
                 <button type="button" data-action="contact">
-                    <i class="fa-solid fa-headset"></i><span data-chat="contact">Contact Us</span>
+                    <i class="fa-solid fa-headset"></i>
+                    <span data-chat="contact">Contact Us</span>
                 </button>
+
             </div>
 
+
             <div class="chatbot-input-area">
-                <input id="chatbotInput" type="text" autocomplete="off"
-                       data-chat-placeholder="Type your question..."
-                       placeholder="Type your question...">
+
+                <input
+                    id="chatbotInput"
+                    type="text"
+                    autocomplete="off"
+                    data-chat-placeholder="Type your question..."
+                    placeholder="Type your question..."
+                >
+
                 <button id="chatbotSend" type="button" aria-label="Send message">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
+
             </div>
+
 
             <div class="chatbot-footer">
                 <i class="fa-solid fa-shield-heart"></i>
                 <span data-chat="footer">Athena Assistant • Clinic information only</span>
             </div>
+
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer>
         <p data-key="footer">© 2026 Athena Dental Clinic | Dental Clinic in El Shorouk City</p>
     </footer>
+
 
     <script src="script.js?v=3"></script>
 
