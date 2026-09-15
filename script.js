@@ -212,7 +212,12 @@ const translations = {
         doctor4Name: "Dr. Mohamed Mansour",
         doctor5Name: "Dr. Noran Tarek",
 
-        doctorRole: "Dental Doctor",
+        // Each doctor now has a separate translation key
+        doctor1Role: "Prosthodontics",
+        doctor2Role: "General Dentistry",
+        doctor3Role: "Endodontics",
+        doctor4Role: "Oral & Maxillofacial Surgery",
+        doctor5Role: "Orthodontics",
 
         reviewsSmall: "PATIENT STORIES",
         reviewsTitle: "What Our Patients Say",
@@ -366,7 +371,12 @@ const translations = {
         doctor4Name: "دكتور محمد منصور",
         doctor5Name: "دكتورة نوران طارق",
 
-        doctorRole: "طبيب أسنان",
+        // Each doctor now has a separate Arabic translation
+        doctor1Role: "تركيبات الأسنان",
+        doctor2Role: "طب الأسنان العام",
+        doctor3Role: "علاج جذور الأسنان وحشو العصب",
+        doctor4Role: "جراحة الفم والوجه والفكين",
+        doctor5Role: "تقويم الأسنان",
 
         reviewsSmall: "آراء المرضى",
         reviewsTitle: "ماذا يقول مرضاؤنا؟",
