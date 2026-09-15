@@ -410,13 +410,14 @@ const translations = {
     }
 
 };
+
+
 // =========================================================
 // Change Language
 // =========================================================
 
 function changeLanguage(language) {
 
-    // Only allow the languages actually supported by the website.
     if (!Object.prototype.hasOwnProperty.call(translations, language)) {
         language = "en";
     }
@@ -557,8 +558,6 @@ function changeLanguage(language) {
     }
 
 
-    // localStorage is optional.
-    // If the browser blocks it, the website should still work.
     try {
 
         localStorage.setItem(
@@ -636,8 +635,6 @@ document.addEventListener(
     "click",
     function (event) {
 
-        // Make sure the click target is a real DOM element
-        // before using closest().
         if (!(event.target instanceof Element)) {
             return;
         }
@@ -689,7 +686,10 @@ document.addEventListener(
 
 
         // Google Maps
-        if (href.includes("google.com/maps")) {
+        if (
+            href.includes("google.com/maps") ||
+            href.includes("maps.app.goo.gl")
+        ) {
 
             trackAthenaEvent(
                 "maps_click",
@@ -752,8 +752,6 @@ document.addEventListener(
         document.getElementById("chatbotQuickActions");
 
 
-    // If the chatbot HTML is missing,
-    // stop without breaking the rest of the website.
     if (
         !toggle ||
         !panel ||
@@ -772,8 +770,9 @@ document.addEventListener(
     const whatsappUrl =
         "https://wa.me/201020367122";
 
+    // Official clinic location link supplied for the website
     const mapsUrl =
-        "https://www.google.com/maps/place/Athena+Dental+Clinic/@30.1696288,31.5968089,17z";
+        "https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy";
 
     const phoneUrl =
         "tel:+201020367122";
@@ -1004,673 +1003,736 @@ document.addEventListener(
         }
 
     }
+
+
     // =====================================================
-// Current time
-// =====================================================
-
-function currentTime() {
-
-    return new Date().toLocaleTimeString(
-        activeLanguage === "ar"
-            ? "ar-EG"
-            : "en-EG",
-        {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
-
-}
-
-
-// =====================================================
-// Safe message creation
-// =====================================================
-
-function addMessage(text, type) {
-
-    const row =
-        document.createElement("div");
-
-    row.className =
-        "chatbot-message " + type;
-
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "chatbot-bubble";
-
-
-    // Use textContent instead of innerHTML.
-    // This prevents HTML/script injection.
-    bubble.textContent = text;
-
-
-    const time =
-        document.createElement("span");
-
-    time.className =
-        "chatbot-time";
-
-    time.textContent =
-        currentTime();
-
-
-    bubble.appendChild(time);
-
-    row.appendChild(bubble);
-
-    messages.appendChild(row);
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-}
-
-
-// =====================================================
-// Safe action link
-// =====================================================
-
-function addLinkMessage(text, url) {
-
-    // Only allow the fixed links defined above.
-    // No URL coming from user input is ever used here.
-    if (
-        url !== whatsappUrl &&
-        url !== mapsUrl &&
-        url !== phoneUrl
-    ) {
-        return;
-    }
-
-
-    const row =
-        document.createElement("div");
-
-    row.className =
-        "chatbot-message bot";
-
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "chatbot-bubble";
-
-
-    if (text) {
-
-        const textElement =
-            document.createElement("span");
-
-        textElement.textContent =
-            text;
-
-        bubble.appendChild(textElement);
-
-    }
-
-
-    const breakElement =
-        document.createElement("br");
-
-    bubble.appendChild(breakElement);
-
-
-    const link =
-        document.createElement("a");
-
-    link.href = url;
-
-
-    // External links open safely in a new tab.
-    if (url === whatsappUrl || url === mapsUrl) {
-
-        link.target = "_blank";
-
-        link.rel =
-            "noopener noreferrer";
-
-    }
-
-
-    if (url === whatsappUrl) {
-
-        link.textContent =
-            t("bookingLink");
-
-    } else if (url === mapsUrl) {
-
-        link.textContent =
-            t("mapLink");
-
-    } else {
-
-        link.textContent =
-            t("phoneLink");
-
-    }
-
-
-    bubble.appendChild(link);
-
-
-    const time =
-        document.createElement("span");
-
-    time.className =
-        "chatbot-time";
-
-    time.textContent =
-        currentTime();
-
-
-    bubble.appendChild(time);
-
-    row.appendChild(bubble);
-
-    messages.appendChild(row);
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-}
-
-
-// =====================================================
-// Typing animation
-// =====================================================
-
-function showTyping(callback) {
-
-    const row =
-        document.createElement("div");
-
-    row.className =
-        "chatbot-message bot";
-
-    row.id =
-        "athenaTyping";
-
-
-    const typing =
-        document.createElement("div");
-
-    typing.className =
-        "chatbot-typing";
-
-
-    for (let i = 0; i < 3; i++) {
-
-        const dot =
-            document.createElement("span");
-
-        typing.appendChild(dot);
-
-    }
-
-
-    row.appendChild(typing);
-
-    messages.appendChild(row);
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-
-    setTimeout(function () {
-
-        const existing =
-            document.getElementById(
-                "athenaTyping"
-            );
-
-
-        if (existing) {
-            existing.remove();
-        }
-
-
-        callback();
-
-    }, 500);
-
-}
-
-
-function addBotReply(text) {
-
-    showTyping(function () {
-
-        addMessage(
-            text,
-            "bot"
+    // Current time
+    // =====================================================
+
+    function currentTime() {
+
+        return new Date().toLocaleTimeString(
+            activeLanguage === "ar"
+                ? "ar-EG"
+                : "en-EG",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
         );
 
-    });
-
-}
-
-
-// =====================================================
-// Scroll section
-// =====================================================
-
-function scrollToSection(id) {
-
-    // Only scroll to known section IDs.
-    const allowedSections = [
-        "services",
-        "doctors",
-        "reviews",
-        "contact"
-    ];
-
-    if (!allowedSections.includes(id)) {
-        return;
     }
 
 
-    const section =
-        document.getElementById(id);
+    // =====================================================
+    // Safe message creation
+    // =====================================================
 
-    if (section) {
+    function addMessage(text, type) {
 
-        section.scrollIntoView({
-            behavior: "smooth"
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "chatbot-message " + type;
+
+
+        const bubble =
+            document.createElement("div");
+
+        bubble.className =
+            "chatbot-bubble";
+
+
+        bubble.textContent = text;
+
+
+        const time =
+            document.createElement("span");
+
+        time.className =
+            "chatbot-time";
+
+        time.textContent =
+            currentTime();
+
+
+        bubble.appendChild(time);
+
+        row.appendChild(bubble);
+
+        messages.appendChild(row);
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }
+
+
+    // =====================================================
+    // Safe action link
+    // =====================================================
+
+    function addLinkMessage(text, url) {
+
+        if (
+            url !== whatsappUrl &&
+            url !== mapsUrl &&
+            url !== phoneUrl
+        ) {
+            return;
+        }
+
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "chatbot-message bot";
+
+
+        const bubble =
+            document.createElement("div");
+
+        bubble.className =
+            "chatbot-bubble";
+
+
+        if (text) {
+
+            const textElement =
+                document.createElement("span");
+
+            textElement.textContent =
+                text;
+
+            bubble.appendChild(textElement);
+
+        }
+
+
+        const breakElement =
+            document.createElement("br");
+
+        bubble.appendChild(breakElement);
+
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+
+        if (url === whatsappUrl || url === mapsUrl) {
+
+            link.target = "_blank";
+
+            link.rel =
+                "noopener noreferrer";
+
+        }
+
+
+        if (url === whatsappUrl) {
+
+            link.textContent =
+                t("bookingLink");
+
+        } else if (url === mapsUrl) {
+
+            link.textContent =
+                t("mapLink");
+
+        } else {
+
+            link.textContent =
+                t("phoneLink");
+
+        }
+
+
+        bubble.appendChild(link);
+
+
+        const time =
+            document.createElement("span");
+
+        time.className =
+            "chatbot-time";
+
+        time.textContent =
+            currentTime();
+
+
+        bubble.appendChild(time);
+
+        row.appendChild(bubble);
+
+        messages.appendChild(row);
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }
+
+
+    // =====================================================
+    // Typing animation
+    // =====================================================
+
+    function showTyping(callback) {
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "chatbot-message bot";
+
+        row.id =
+            "athenaTyping";
+
+
+        const typing =
+            document.createElement("div");
+
+        typing.className =
+            "chatbot-typing";
+
+
+        for (let i = 0; i < 3; i++) {
+
+            const dot =
+                document.createElement("span");
+
+            typing.appendChild(dot);
+
+        }
+
+
+        row.appendChild(typing);
+
+        messages.appendChild(row);
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        setTimeout(function () {
+
+            const existing =
+                document.getElementById(
+                    "athenaTyping"
+                );
+
+
+            if (existing) {
+                existing.remove();
+            }
+
+
+            callback();
+
+        }, 500);
+
+    }
+
+
+    function addBotReply(text) {
+
+        showTyping(function () {
+
+            addMessage(
+                text,
+                "bot"
+            );
+
         });
 
     }
 
-}
+
+    // =====================================================
+    // Scroll section
+    // =====================================================
+
+    function scrollToSection(id) {
+
+        const allowedSections = [
+            "services",
+            "doctors",
+            "reviews",
+            "contact"
+        ];
 
 
-// =====================================================
-// Quick actions
-// =====================================================
-
-function handleAction(action) {
-
-    trackAthenaEvent(
-        "chatbot_action",
-        {
-            action: action
-        }
-    );
-
-
-    const replies = {
-
-        services: {
-            user: t("userServices"),
-            reply: t("serviceReply"),
-            section: "services"
-        },
-
-        booking: {
-            user: t("userBooking"),
-            reply: t("bookingReply"),
-            url: whatsappUrl
-        },
-
-        location: {
-            user: t("userLocation"),
-            reply: t("locationReply"),
-            url: mapsUrl,
-            section: "contact"
-        },
-
-        contact: {
-            user: t("userContact"),
-            reply: t("contactReply"),
-            section: "contact"
+        if (!allowedSections.includes(id)) {
+            return;
         }
 
-    };
+
+        const section =
+            document.getElementById(id);
+
+        if (section) {
+
+            section.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    }
 
 
-    const item =
-        replies[action];
+    // =====================================================
+    // Quick actions
+    // =====================================================
 
-    if (!item) return;
+    function handleAction(action) {
 
-
-    addMessage(
-        item.user,
-        "user"
-    );
-
-
-    showTyping(function () {
-
-        addMessage(
-            item.reply,
-            "bot"
+        trackAthenaEvent(
+            "chatbot_action",
+            {
+                action: action
+            }
         );
 
 
-        if (item.url) {
+        const replies = {
 
-            addLinkMessage(
-                "",
-                item.url
+            services: {
+                user: t("userServices"),
+                reply: t("serviceReply"),
+                section: "services"
+            },
+
+            booking: {
+                user: t("userBooking"),
+                reply: t("bookingReply"),
+                url: whatsappUrl
+            },
+
+            location: {
+                user: t("userLocation"),
+                reply: t("locationReply"),
+                url: mapsUrl,
+                section: "contact"
+            },
+
+            contact: {
+                user: t("userContact"),
+                reply: t("contactReply"),
+                section: "contact"
+            }
+
+        };
+
+
+        const item =
+            replies[action];
+
+        if (!item) return;
+
+
+        // =================================================
+        // Open clinic location directly
+        // =================================================
+
+        if (action === "location") {
+
+            window.open(
+                mapsUrl,
+                "_blank",
+                "noopener,noreferrer"
             );
 
         }
 
-    });
-
-
-    if (item.section) {
-
-        setTimeout(function () {
-
-            scrollToSection(
-                item.section
-            );
-
-        }, 900);
-
-    }
-
-}
-
-
-// =====================================================
-// Classify user message
-// =====================================================
-
-function classifyMessage(message) {
-
-    const m =
-        message
-            .toLowerCase()
-            .trim();
-
-
-    if (
-        m.includes("service") ||
-        m.includes("services") ||
-        m.includes("خدمات") ||
-        m.includes("بتقدم") ||
-        m.includes("بتقدمو")
-    ) {
-        return "services";
-    }
-
-
-    if (
-        m.includes("book") ||
-        m.includes("appointment") ||
-        m.includes("booking") ||
-        m.includes("حجز") ||
-        m.includes("احجز") ||
-        m.includes("موعد")
-    ) {
-        return "booking";
-    }
-
-
-    if (
-        m.includes("location") ||
-        m.includes("where") ||
-        m.includes("address") ||
-        m.includes("فين") ||
-        m.includes("مكان") ||
-        m.includes("عنوان") ||
-        m.includes("الشروق")
-    ) {
-        return "location";
-    }
-
-
-    if (
-        m.includes("contact") ||
-        m.includes("phone") ||
-        m.includes("whatsapp") ||
-        m.includes("تواصل") ||
-        m.includes("رقم") ||
-        m.includes("واتساب")
-    ) {
-        return "contact";
-    }
-
-
-    if (
-        m.includes("hour") ||
-        m.includes("open") ||
-        m.includes("opening") ||
-        m.includes("مواعيد") ||
-        m.includes("مفتوح") ||
-        m.includes("العمل")
-    ) {
-        return "hours";
-    }
-
-
-    if (
-        m.includes("doctor") ||
-        m.includes("doctors") ||
-        m.includes("دكتور") ||
-        m.includes("أطباء") ||
-        m.includes("اطباء")
-    ) {
-        return "doctors";
-    }
-
-
-    if (
-        m.includes("review") ||
-        m.includes("reviews") ||
-        m.includes("rating") ||
-        m.includes("تقييم") ||
-        m.includes("آراء") ||
-        m.includes("اراء")
-    ) {
-        return "reviews";
-    }
-
-
-    if (
-        m === "hi" ||
-        m === "hello" ||
-        m === "hey" ||
-        m.includes("welcome") ||
-        m.includes("اهلا") ||
-        m.includes("أهلا") ||
-        m.includes("هاي") ||
-        m.includes("سلام") ||
-        m.includes("صباح") ||
-        m.includes("مساء")
-    ) {
-        return "hello";
-    }
-
-
-    return "unknown";
-
-}
-
-
-// =====================================================
-// Handle typed message
-// =====================================================
-
-function handleText() {
-
-    const raw =
-        input.value.trim();
-
-
-    if (!raw) return;
-
-
-    // Limit extremely long input.
-    // This prevents unnecessary DOM/memory usage.
-    const message =
-        raw.slice(0, 500);
-
-
-    addMessage(
-        message,
-        "user"
-    );
-
-
-    input.value = "";
-
-
-    const type =
-        classifyMessage(message);
-
-
-    const responses = {
-
-        hello:
-            t("hello"),
-
-        services:
-            t("serviceReply"),
-
-        booking:
-            t("bookingReply"),
-
-        location:
-            t("locationReply"),
-
-        contact:
-            t("contactReply"),
-
-        hours:
-            t("hoursReply"),
-
-        doctors:
-            t("doctorsReply"),
-
-        reviews:
-            t("reviewsReply"),
-
-        unknown:
-            t("unknown")
-
-    };
-
-
-    showTyping(function () {
 
         addMessage(
-            responses[type] ||
-            responses.unknown,
-            "bot"
+            item.user,
+            "user"
         );
 
 
-        if (type === "booking") {
+        showTyping(function () {
 
-            addLinkMessage(
-                "",
-                whatsappUrl
+            addMessage(
+                item.reply,
+                "bot"
             );
+
+
+            if (item.url) {
+
+                addLinkMessage(
+                    "",
+                    item.url
+                );
+
+            }
+
+        });
+
+
+        if (item.section) {
+
+            setTimeout(function () {
+
+                scrollToSection(
+                    item.section
+                );
+
+            }, 900);
+
+        }
+
+    }
+
+
+    // =====================================================
+    // Classify user message
+    // =====================================================
+
+    function classifyMessage(message) {
+
+        const m =
+            message
+                .toLowerCase()
+                .trim();
+
+
+        if (
+            m.includes("service") ||
+            m.includes("services") ||
+            m.includes("خدمات") ||
+            m.includes("بتقدم") ||
+            m.includes("بتقدمو")
+        ) {
+            return "services";
+        }
+
+
+        if (
+            m.includes("book") ||
+            m.includes("appointment") ||
+            m.includes("booking") ||
+            m.includes("حجز") ||
+            m.includes("احجز") ||
+            m.includes("موعد")
+        ) {
+            return "booking";
+        }
+
+
+        if (
+            m.includes("location") ||
+            m.includes("where") ||
+            m.includes("address") ||
+            m.includes("فين") ||
+            m.includes("مكان") ||
+            m.includes("عنوان") ||
+            m.includes("الشروق")
+        ) {
+            return "location";
+        }
+
+
+        if (
+            m.includes("contact") ||
+            m.includes("phone") ||
+            m.includes("whatsapp") ||
+            m.includes("تواصل") ||
+            m.includes("رقم") ||
+            m.includes("واتساب")
+        ) {
+            return "contact";
+        }
+
+
+        if (
+            m.includes("hour") ||
+            m.includes("open") ||
+            m.includes("opening") ||
+            m.includes("مواعيد") ||
+            m.includes("مفتوح") ||
+            m.includes("العمل")
+        ) {
+            return "hours";
+        }
+
+
+        if (
+            m.includes("doctor") ||
+            m.includes("doctors") ||
+            m.includes("دكتور") ||
+            m.includes("أطباء") ||
+            m.includes("اطباء")
+        ) {
+            return "doctors";
+        }
+
+
+        if (
+            m.includes("review") ||
+            m.includes("reviews") ||
+            m.includes("rating") ||
+            m.includes("تقييم") ||
+            m.includes("آراء") ||
+            m.includes("اراء")
+        ) {
+            return "reviews";
+        }
+
+
+        if (
+            m === "hi" ||
+            m === "hello" ||
+            m === "hey" ||
+            m.includes("welcome") ||
+            m.includes("اهلا") ||
+            m.includes("أهلا") ||
+            m.includes("هاي") ||
+            m.includes("سلام") ||
+            m.includes("صباح") ||
+            m.includes("مساء")
+        ) {
+            return "hello";
+        }
+
+
+        return "unknown";
+
+    }
+
+
+    // =====================================================
+    // Handle typed message
+    // =====================================================
+
+    function handleText() {
+
+        const raw =
+            input.value.trim();
+
+
+        if (!raw) return;
+
+
+        const message =
+            raw.slice(0, 500);
+
+
+        addMessage(
+            message,
+            "user"
+        );
+
+
+        input.value = "";
+
+
+        const type =
+            classifyMessage(message);
+
+
+        const responses = {
+
+            hello:
+                t("hello"),
+
+            services:
+                t("serviceReply"),
+
+            booking:
+                t("bookingReply"),
+
+            location:
+                t("locationReply"),
+
+            contact:
+                t("contactReply"),
+
+            hours:
+                t("hoursReply"),
+
+            doctors:
+                t("doctorsReply"),
+
+            reviews:
+                t("reviewsReply"),
+
+            unknown:
+                t("unknown")
+
+        };
+
+
+        showTyping(function () {
+
+            addMessage(
+                responses[type] ||
+                responses.unknown,
+                "bot"
+            );
+
+
+            if (type === "booking") {
+
+                addLinkMessage(
+                    "",
+                    whatsappUrl
+                );
+
+            }
+
+
+            if (type === "location") {
+
+                addLinkMessage(
+                    "",
+                    mapsUrl
+                );
+
+            }
+
+        });
+
+
+        if (type === "services") {
+
+            setTimeout(function () {
+
+                scrollToSection(
+                    "services"
+                );
+
+            }, 900);
 
         }
 
 
-        if (type === "location") {
+        if (type === "doctors") {
 
-            addLinkMessage(
-                "",
-                mapsUrl
-            );
+            setTimeout(function () {
+
+                scrollToSection(
+                    "doctors"
+                );
+
+            }, 900);
 
         }
 
-    });
+
+        if (type === "reviews") {
+
+            setTimeout(function () {
+
+                scrollToSection(
+                    "reviews"
+                );
+
+            }, 900);
+
+        }
 
 
-    if (type === "services") {
+        if (
+            type === "location" ||
+            type === "contact"
+        ) {
 
-        setTimeout(function () {
+            setTimeout(function () {
 
-            scrollToSection(
-                "services"
-            );
+                scrollToSection(
+                    "contact"
+                );
 
-        }, 900);
+            }, 900);
 
-    }
-
-
-    if (type === "doctors") {
-
-        setTimeout(function () {
-
-            scrollToSection(
-                "doctors"
-            );
-
-        }, 900);
-
-    }
-
-
-    if (type === "reviews") {
-
-        setTimeout(function () {
-
-            scrollToSection(
-                "reviews"
-            );
-
-        }, 900);
+        }
 
     }
 
 
-    if (
-        type === "location" ||
-        type === "contact"
-    ) {
+    // =====================================================
+    // Open chatbot
+    // =====================================================
+
+    function openChat() {
+
+        trackAthenaEvent(
+            "chatbot_open"
+        );
+
+
+        panel.classList.add("open");
+
+        panel.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        toggle.classList.add("open");
+
+
+        if (!openedOnce) {
+
+            openedOnce = true;
+
+
+            setTimeout(function () {
+
+                addBotReply(
+                    t("hello")
+                );
+
+            }, 200);
+
+        }
+
 
         setTimeout(function () {
 
-            scrollToSection(
-                "contact"
-            );
+            if (input) {
+                input.focus();
+            }
 
-        }, 900);
+        }, 300);
 
     }
 
-}
+
+    // =====================================================
+    // Close chatbot
+    // =====================================================
+
+    function closeChat() {
+
+        panel.classList.remove("open");
+
+        panel.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        toggle.classList.remove("open");
+
+    }
 
 
-// =====================================================
-// Open chatbot
-// =====================================================
+    // =====================================================
+    // Clear chatbot
+    // =====================================================
 
-function openChat() {
+    function clearChat() {
 
-    trackAthenaEvent(
-        "chatbot_open"
-    );
-
-
-    panel.classList.add("open");
-
-    panel.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    toggle.classList.add("open");
-
-
-    if (!openedOnce) {
-
-        openedOnce = true;
+        while (messages.firstChild) {
+            messages.removeChild(
+                messages.firstChild
+            );
+        }
 
 
         setTimeout(function () {
@@ -1679,176 +1741,122 @@ function openChat() {
                 t("hello")
             );
 
-        }, 200);
+        }, 100);
 
     }
 
 
-    setTimeout(function () {
+    // =====================================================
+    // Events
+    // =====================================================
 
-        if (input) {
-            input.focus();
-        }
-
-    }, 300);
-
-}
-
-
-// =====================================================
-// Close chatbot
-// =====================================================
-
-function closeChat() {
-
-    panel.classList.remove("open");
-
-    panel.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    toggle.classList.remove("open");
-
-}
-
-
-// =====================================================
-// Clear chatbot
-// =====================================================
-
-function clearChat() {
-
-    // Avoid innerHTML entirely.
-    while (messages.firstChild) {
-        messages.removeChild(
-            messages.firstChild
-        );
-    }
-
-
-    setTimeout(function () {
-
-        addBotReply(
-            t("hello")
-        );
-
-    }, 100);
-
-}
-
-
-// =====================================================
-// Events
-// =====================================================
-
-toggle.addEventListener(
-    "click",
-    function () {
-
-        if (
-            panel.classList.contains("open")
-        ) {
-
-            closeChat();
-
-        } else {
-
-            openChat();
-
-        }
-
-    }
-);
-
-
-if (closeBtn) {
-
-    closeBtn.addEventListener(
+    toggle.addEventListener(
         "click",
-        closeChat
-    );
+        function () {
 
-}
+            if (
+                panel.classList.contains("open")
+            ) {
 
+                closeChat();
 
-if (clearBtn) {
+            } else {
 
-    clearBtn.addEventListener(
-        "click",
-        clearChat
-    );
+                openChat();
 
-}
-
-
-sendBtn.addEventListener(
-    "click",
-    handleText
-);
-
-
-input.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (event.key === "Enter") {
-
-            event.preventDefault();
-
-            handleText();
-
-        }
-
-    }
-);
-
-
-if (quickActions) {
-
-    quickActions.addEventListener(
-        "click",
-        function (event) {
-
-            if (!(event.target instanceof Element)) {
-                return;
             }
 
-
-            const button =
-                event.target.closest(
-                    "button[data-action]"
-                );
+        }
+    );
 
 
-            if (!button) return;
+    if (closeBtn) {
+
+        closeBtn.addEventListener(
+            "click",
+            closeChat
+        );
+
+    }
 
 
-            const action =
-                button.getAttribute(
-                    "data-action"
-                );
+    if (clearBtn) {
+
+        clearBtn.addEventListener(
+            "click",
+            clearChat
+        );
+
+    }
 
 
-            handleAction(action);
+    sendBtn.addEventListener(
+        "click",
+        handleText
+    );
+
+
+    input.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                handleText();
+
+            }
 
         }
     );
 
-}
+
+    if (quickActions) {
+
+        quickActions.addEventListener(
+            "click",
+            function (event) {
+
+                if (!(event.target instanceof Element)) {
+                    return;
+                }
 
 
-// =====================================================
-// Language change
-// =====================================================
-
-document.addEventListener(
-    "athenaLanguageChanged",
-    syncChatLanguage
-);
+                const button =
+                    event.target.closest(
+                        "button[data-action]"
+                    );
 
 
-// Initial chatbot language sync
-syncChatLanguage();
+                if (!button) return;
+
+
+                const action =
+                    button.getAttribute(
+                        "data-action"
+                    );
+
+
+                handleAction(action);
+
+            }
+        );
+
+    }
+
+
+    // =====================================================
+    // Language change
+    // =====================================================
+
+    document.addEventListener(
+        "athenaLanguageChanged",
+        syncChatLanguage
+    );
+
+
+    // Initial chatbot language sync
+    syncChatLanguage();
 
 })();
