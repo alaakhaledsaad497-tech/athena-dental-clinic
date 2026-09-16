@@ -1,13 +1,9 @@
-// =========================================================
 // ATHENA DENTAL CLINIC — MAIN JAVASCRIPT
-// =========================================================
 
 "use strict";
 
 
-// =========================================================
 // Google Analytics
-// =========================================================
 
 function trackAthenaEvent(eventName, params = {}) {
     try {
@@ -15,14 +11,12 @@ function trackAthenaEvent(eventName, params = {}) {
             window.gtag("event", eventName, params);
         }
     } catch (error) {
-        // Analytics must never break the website.
+        // keep analytics from causing problems
     }
 }
 
 
-// =========================================================
 // Smooth Scroll
-// =========================================================
 
 document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 
@@ -48,9 +42,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 });
 
 
-// =========================================================
 // Scroll Reveal Animation
-// =========================================================
 
 const revealElements = document.querySelectorAll(".reveal");
 
@@ -75,9 +67,7 @@ window.addEventListener("scroll", revealOnScroll, {
 window.addEventListener("load", revealOnScroll);
 
 
-// =========================================================
 // Navbar Scroll Effect
-// =========================================================
 
 const header = document.querySelector("header");
 
@@ -100,9 +90,7 @@ window.addEventListener("scroll", handleNavbar, {
 handleNavbar();
 
 
-// =========================================================
 // BILINGUAL WEBSITE
-// =========================================================
 
 const translations = {
 
@@ -207,12 +195,12 @@ const translations = {
             "A professional team caring for your smile.",
 
         doctor1Name: "Dr. Ahmed Okl",
-        doctor2Name: "Dr. Passant Refaat",
+        doctor2Name: "Dr. Basant Refaat",
         doctor3Name: "Dr. Nourhan Tarik",
         doctor4Name: "Dr. Mohamed Mansour",
         doctor5Name: "Dr. Noran Tarek",
 
-        // Each doctor now has a separate translation key
+        // each doctor has its own translation
         doctor1Role: "Prosthodontics",
         doctor2Role: "General Dentistry",
         doctor3Role: "Endodontics",
@@ -371,7 +359,7 @@ const translations = {
         doctor4Name: "دكتور محمد منصور",
         doctor5Name: "دكتورة نوران طارق",
 
-        // Each doctor now has a separate Arabic translation
+        // arabic text for each doctor
         doctor1Role: "تركيبات الأسنان",
         doctor2Role: "طب الأسنان العام",
         doctor3Role: "علاج جذور الأسنان وحشو العصب",
@@ -422,9 +410,7 @@ const translations = {
 };
 
 
-// =========================================================
 // Change Language
-// =========================================================
 
 function changeLanguage(language) {
 
@@ -577,7 +563,7 @@ function changeLanguage(language) {
 
     } catch (error) {
 
-        // Ignore storage errors.
+        // ignore storage errors
 
     }
 
@@ -589,9 +575,7 @@ function changeLanguage(language) {
 }
 
 
-// =========================================================
 // Language Button
-// =========================================================
 
 const languageBtn =
     document.getElementById("languageBtn");
@@ -615,9 +599,7 @@ if (languageBtn) {
 }
 
 
-// =========================================================
 // Restore Saved Language
-// =========================================================
 
 let savedLanguage = null;
 
@@ -628,7 +610,7 @@ try {
 
 } catch (error) {
 
-    // Fall back to English.
+    // use English if needed
 
 }
 
@@ -637,9 +619,7 @@ changeLanguage(
 );
 
 
-// =========================================================
 // Analytics — Links & Buttons
-// =========================================================
 
 document.addEventListener(
     "click",
@@ -731,9 +711,7 @@ document.addEventListener(
 );
 
 
-// =========================================================
 // ATHENA SMART CHATBOT
-// =========================================================
 
 (function () {
 
@@ -773,14 +751,12 @@ document.addEventListener(
     }
 
 
-    // =====================================================
-    // Fixed / allowlisted links
-    // =====================================================
+    // links used by the chatbot
 
     const whatsappUrl =
         "https://wa.me/201020367122";
 
-    // Official clinic location link supplied for the website
+    // clinic location link
     const mapsUrl =
         "https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy";
 
@@ -796,9 +772,7 @@ document.addEventListener(
     let openedOnce = false;
 
 
-    // =====================================================
     // Chatbot translations
-    // =====================================================
 
     const chatTranslations = {
 
@@ -977,9 +951,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Sync chatbot language
-    // =====================================================
 
     function syncChatLanguage() {
 
@@ -1015,9 +987,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Current time
-    // =====================================================
 
     function currentTime() {
 
@@ -1034,9 +1004,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Safe message creation
-    // =====================================================
 
     function addMessage(text, type) {
 
@@ -1079,9 +1047,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Safe action link
-    // =====================================================
 
     function addLinkMessage(text, url) {
 
@@ -1186,9 +1152,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Typing animation
-    // =====================================================
 
     function showTyping(callback) {
 
@@ -1261,9 +1225,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Scroll section
-    // =====================================================
 
     function scrollToSection(id) {
 
@@ -1294,9 +1256,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Quick actions
-    // =====================================================
 
     function handleAction(action) {
 
@@ -1344,9 +1304,7 @@ document.addEventListener(
         if (!item) return;
 
 
-        // =================================================
         // Open clinic location directly
-        // =================================================
 
         if (action === "location") {
 
@@ -1400,9 +1358,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Classify user message
-    // =====================================================
 
     function classifyMessage(message) {
 
@@ -1516,9 +1472,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Handle typed message
-    // =====================================================
 
     function handleText() {
 
@@ -1666,9 +1620,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Open chatbot
-    // =====================================================
 
     function openChat() {
 
@@ -1714,9 +1666,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Close chatbot
-    // =====================================================
 
     function closeChat() {
 
@@ -1732,9 +1682,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Clear chatbot
-    // =====================================================
 
     function clearChat() {
 
@@ -1756,9 +1704,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Events
-    // =====================================================
 
     toggle.addEventListener(
         "click",
@@ -1856,9 +1802,7 @@ document.addEventListener(
     }
 
 
-    // =====================================================
     // Language change
-    // =====================================================
 
     document.addEventListener(
         "athenaLanguageChanged",
