@@ -217,7 +217,7 @@ const translations = {
             "Been all over different clinics for numerous years and thanks to Dr. Ahmed Okl and the crew I don't fear working out my teeth anymore.",
 
         review4:
-            "Very professional service and a comfortable experience from the first visit.",
+            "It was a greatful experience with Dr Basant Teeth whitening is effectively & Doctor is friendly and make me feels comfortable.",
 
         googleText:
             "Want to hear more from our patients?",
