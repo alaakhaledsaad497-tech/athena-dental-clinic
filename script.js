@@ -207,7 +207,7 @@ const translations = {
             "A professional team caring for your smile.",
 
         doctor1Name: "Dr. Ahmed Okl",
-        doctor2Name: "Dr. Basant Rafeat",
+        doctor2Name: "Dr. Basant Refaat",
         doctor3Name: "Dr. Nourhan Tarik",
         doctor4Name: "Dr. Mohamed Mansour",
         doctor5Name: "Dr. Noran Tarek",
