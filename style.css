@@ -826,7 +826,7 @@ footer p {
     }
 
 }
-/* Arabic version — keep navbar order/design unchanged */
+/* Arabic version */
 html[dir="rtl"] body {
     direction: rtl;
 }
@@ -899,7 +899,7 @@ html[dir="rtl"] .faq-card.show:hover {
     font-size: 12px;
 }
 
-/* Arabic text only - navbar keeps the same visual order */
+/* Arabic text */
 html.arabic body {
     direction: rtl;
 }
