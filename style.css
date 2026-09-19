@@ -637,6 +637,14 @@ nav a:hover {
     margin-bottom: 0;
     padding: 0;
     overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #eee8dc;
+    border-radius: 18px;
+    transition: box-shadow .25s ease, transform .25s ease;
+}
+
+.faq-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .faq-question {
@@ -660,6 +668,7 @@ nav a:hover {
     display: flex;
     align-items: center;
     gap: 14px;
+    min-width: 0;
 }
 
 .faq-question-main > i:first-child {
@@ -674,9 +683,14 @@ nav a:hover {
     border-radius: 10px;
 }
 
+.faq-question-main span {
+    line-height: 1.5;
+}
+
 .faq-arrow {
     color: #b49768;
     font-size: 12px;
+    flex-shrink: 0;
     transition: transform .25s ease;
 }
 
@@ -684,15 +698,15 @@ nav a:hover {
     transform: rotate(180deg);
 }
 
+/* Simple max-height accordion: reliable on GitHub Pages and mobile browsers */
 .faq-answer {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows .25s ease;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
 }
 
 .faq-answer p {
-    min-height: 0;
-    overflow: hidden;
+    margin: 0;
     padding: 0 22px 0 76px;
     color: #777;
     font-size: 13px;
@@ -700,7 +714,7 @@ nav a:hover {
 }
 
 .faq-card.open .faq-answer {
-    grid-template-rows: 1fr;
+    max-height: 300px;
 }
 
 .faq-card.open .faq-answer p {
@@ -726,15 +740,24 @@ html[dir="rtl"] .faq-answer p {
         padding: 17px;
     }
 
+    .faq-question-main {
+        gap: 10px;
+    }
+
+    .faq-question-main > i:first-child {
+        width: 36px;
+        height: 36px;
+    }
+
     .faq-answer p {
-        padding-left: 71px;
+        padding-left: 63px;
         padding-right: 17px;
         font-size: 12px;
     }
 
     html[dir="rtl"] .faq-answer p {
         padding-left: 17px;
-        padding-right: 71px;
+        padding-right: 63px;
     }
 }
 
