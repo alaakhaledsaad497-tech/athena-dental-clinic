@@ -627,6 +627,132 @@ nav a:hover {
 }
 
 
+/* FAQ Accordion */
+.faq {
+    display: grid;
+    gap: 14px;
+}
+
+.faq-card {
+    margin-bottom: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    text-align: left;
+    color: #222;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.faq-question-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.faq-question-main > i:first-child {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: #f7f3eb;
+    color: #b49768;
+    border-radius: 10px;
+}
+
+.faq-arrow {
+    color: #b49768;
+    font-size: 12px;
+    transition: transform .25s ease;
+}
+
+.faq-card.open .faq-arrow {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .25s ease;
+}
+
+.faq-answer p {
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 22px 0 76px;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.faq-card.open .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+.faq-card.open .faq-answer p {
+    padding-bottom: 20px;
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid #b49768;
+    outline-offset: -2px;
+}
+
+html[dir="rtl"] .faq-question {
+    text-align: right;
+}
+
+html[dir="rtl"] .faq-answer p {
+    padding-left: 22px;
+    padding-right: 76px;
+}
+
+@media (max-width: 450px) {
+    .faq-question {
+        padding: 17px;
+    }
+
+    .faq-answer p {
+        padding-left: 71px;
+        padding-right: 17px;
+        font-size: 12px;
+    }
+
+    html[dir="rtl"] .faq-answer p {
+        padding-left: 17px;
+        padding-right: 71px;
+    }
+}
+
+/* Working hours */
+.contact-hours {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #777;
+    font-size: 13px;
+}
+
+.contact-hours i {
+    color: #b49768;
+}
+
+
 /* Contact */
 
 #contact {
@@ -1058,3 +1184,61 @@ html.arabic .chatbot-footer i{margin-right:0;margin-left:3px}
 @media(max-width:768px){.athena-chatbot{right:16px;bottom:16px}.chatbot-panel{width:min(370px,calc(100vw - 32px));height:min(570px,calc(100vh - 110px));bottom:72px}.chatbot-toggle{width:58px;height:58px}}
 @media(max-width:450px){.athena-chatbot{right:12px;bottom:12px}.chatbot-panel{right:0;width:calc(100vw - 24px);height:min(560px,calc(100vh - 95px));border-radius:21px}.chatbot-quick-actions button{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.chatbot-pulse,.chatbot-message,.chatbot-typing span{animation:none!important}}
+
+
+/* Small mobile polish */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    section {
+        scroll-margin-top: 95px;
+    }
+
+    .hero-content {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .hero-buttons a {
+        min-width: 145px;
+        text-align: center;
+    }
+
+    .services,
+    .why-container,
+    .reviews {
+        gap: 14px;
+    }
+
+    .service-card,
+    .why-card,
+    .review {
+        padding: 20px;
+    }
+
+    .contact-hours {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 450px) {
+    #faq {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero-buttons {
+        gap: 9px;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+    }
+}
