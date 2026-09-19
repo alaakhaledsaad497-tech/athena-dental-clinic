@@ -1,3 +1,12 @@
+// Google Analytics
+window.dataLayer = window.dataLayer || [];
+function gtag(){ window.dataLayer.push(arguments); }
+gtag("js", new Date());
+gtag("config", "G-LR4R2WL8JP", {
+    send_page_view: true,
+    anonymize_ip: true
+});
+
 // ATHENA DENTAL CLINIC — MAIN JAVASCRIPT
 
 "use strict";
@@ -210,15 +219,6 @@ const translations = {
         reviewsSmall: "PATIENT STORIES",
         reviewsTitle: "What Our Patients Say",
 
-        review1:
-            "الدكتورة بسنت شاطرة جدًا وبتشتغل بايد خفيفة وبتراعي راحة المريض طول الوقت.",
-
-        review2:
-            "Been all over different clinics for numerous years and thanks to Dr. Ahmed Okl and the crew I don't fear working out my teeth anymore.",
-
-        review4:
-            "It was a greatful experience with Dr Basant Teeth whitening is effectively & Doctor is friendly and make me feels comfortable.",
-
         googleText:
             "Want to hear more from our patients?",
 
@@ -368,15 +368,6 @@ const translations = {
 
         reviewsSmall: "آراء المرضى",
         reviewsTitle: "ماذا يقول مرضاؤنا؟",
-
-        review1:
-            "الدكتورة بسنت شاطرة جدًا وبتشتغل بايد خفيفة وبتراعي راحة المريض طول الوقت.",
-
-        review2:
-            "اتعاملت مع عيادات مختلفة لسنين، وبفضل دكتور أحمد العكل والفريق بقيت مش بخاف من علاج أسناني.",
-
-        review4:
-            "خدمة احترافية جدًا وتجربة مريحة من أول زيارة.",
 
         googleText:
             "هل ترغب في معرفة المزيد من آراء مرضانا؟",
@@ -589,9 +580,13 @@ if (languageBtn) {
             const current =
                 document.documentElement.lang || "en";
 
-            changeLanguage(
-                current === "en" ? "ar" : "en"
-            );
+            const nextLanguage = current === "en" ? "ar" : "en";
+
+            changeLanguage(nextLanguage);
+
+            trackAthenaEvent("language_switch", {
+                language: nextLanguage
+            });
 
         }
     );
@@ -711,6 +706,35 @@ document.addEventListener(
 );
 
 
+// FAQ Accordion
+document.addEventListener("click", function (event) {
+
+    if (!(event.target instanceof Element)) return;
+
+    const question = event.target.closest(".faq-question");
+    if (!question) return;
+
+    const card = question.closest(".faq-card");
+    if (!card) return;
+
+    const isOpen = card.classList.contains("open");
+
+    document.querySelectorAll(".faq-card.open").forEach(function (openCard) {
+        openCard.classList.remove("open");
+        const openButton = openCard.querySelector(".faq-question");
+        if (openButton) openButton.setAttribute("aria-expanded", "false");
+    });
+
+    if (!isOpen) {
+        card.classList.add("open");
+        question.setAttribute("aria-expanded", "true");
+
+        trackAthenaEvent("faq_open", {
+            question: (question.textContent || "").trim().slice(0, 80)
+        });
+    }
+});
+
 // ATHENA SMART CHATBOT
 
 (function () {
@@ -796,6 +820,8 @@ document.addEventListener(
 
             contact: "Contact Us",
 
+            hours: "Working Hours",
+
             placeholder:
                 "Type your question...",
 
@@ -818,7 +844,7 @@ document.addEventListener(
                 "You can reach Athena by phone or WhatsApp. Our social links are also available in the Contact section.",
 
             hoursReply:
-                "For appointment availability and clinic hours, please contact the clinic directly on WhatsApp.",
+                "Our working hours are Saturday to Wednesday, from 5:00 PM to 9:00 PM.",
 
             doctorsReply:
                 "Athena has a multidisciplinary dental team. You can see the doctors listed in the Our Doctors section.",
@@ -882,6 +908,9 @@ document.addEventListener(
             contact:
                 "تواصل معنا",
 
+            hours:
+                "مواعيد العمل",
+
             placeholder:
                 "اكتب سؤالك...",
 
@@ -904,7 +933,7 @@ document.addEventListener(
                 "تقدر تتواصل مع عيادة أثينا عن طريق الهاتف أو WhatsApp، وكمان هتلاقي روابط السوشيال ميديا في قسم تواصل معنا.",
 
             hoursReply:
-                "لمعرفة مواعيد العمل والأوقات المتاحة للحجز، الأفضل تتواصل مباشرة مع العيادة على WhatsApp.",
+                "مواعيد العمل من السبت إلى الأربعاء، من الساعة 5 مساءً حتى 9 مساءً.",
 
             doctorsReply:
                 "في أثينا فريق طبي متعدد التخصصات. تقدر تشوف أسماء الأطباء في قسم أطباؤنا.",
@@ -1233,6 +1262,7 @@ document.addEventListener(
             "services",
             "doctors",
             "reviews",
+            "faq",
             "contact"
         ];
 
@@ -1293,6 +1323,12 @@ document.addEventListener(
                 user: t("userContact"),
                 reply: t("contactReply"),
                 section: "contact"
+            },
+
+            hours: {
+                user: t("hours"),
+                reply: t("hoursReply"),
+                section: "faq"
             }
 
         };
@@ -1499,6 +1535,10 @@ document.addEventListener(
         const type =
             classifyMessage(message);
 
+        trackAthenaEvent("chatbot_question", {
+            category: type
+        });
+
 
         const responses = {
 
@@ -1686,6 +1726,8 @@ document.addEventListener(
 
     function clearChat() {
 
+        trackAthenaEvent("chatbot_clear");
+
         while (messages.firstChild) {
             messages.removeChild(
                 messages.firstChild
@@ -1746,14 +1788,17 @@ document.addEventListener(
     }
 
 
-    sendBtn.addEventListener(
-        "click",
-        handleText
-    );
+    if (sendBtn) {
+        sendBtn.addEventListener(
+            "click",
+            handleText
+        );
+    }
 
 
-    input.addEventListener(
-        "keydown",
+    if (input) {
+        input.addEventListener(
+            "keydown",
         function (event) {
 
             if (event.key === "Enter") {
@@ -1765,7 +1810,8 @@ document.addEventListener(
             }
 
         }
-    );
+        );
+    }
 
 
     if (quickActions) {
@@ -1814,3 +1860,4 @@ document.addEventListener(
     syncChatLanguage();
 
 })();
+
