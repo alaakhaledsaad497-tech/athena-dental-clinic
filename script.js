@@ -723,15 +723,23 @@ document.addEventListener("click", function (event) {
         openCard.classList.remove("open");
         const openButton = openCard.querySelector(".faq-question");
         if (openButton) openButton.setAttribute("aria-expanded", "false");
+        const openAnswer = openCard.querySelector(".faq-answer");
+        if (openAnswer) openAnswer.setAttribute("aria-hidden", "true");
     });
 
     if (!isOpen) {
         card.classList.add("open");
         question.setAttribute("aria-expanded", "true");
+        const answer = card.querySelector(".faq-answer");
+        if (answer) answer.setAttribute("aria-hidden", "false");
 
         trackAthenaEvent("faq_open", {
             question: (question.textContent || "").trim().slice(0, 80)
         });
+    } else {
+        question.setAttribute("aria-expanded", "false");
+        const answer = card.querySelector(".faq-answer");
+        if (answer) answer.setAttribute("aria-hidden", "true");
     }
 });
 
