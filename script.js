@@ -236,6 +236,14 @@ const translations = {
         faq2Text:
             "Fillings, root canal, orthodontics, whitening, implants, and more.",
 
+        faq3Title: "What are your working hours?",
+        faq3Text:
+            "Saturday to Wednesday, from 5:00 PM to 9:00 PM.",
+
+        faq4Title: "How can I book an appointment?",
+        faq4Text:
+            "You can contact Athena Dental Clinic directly on WhatsApp to arrange an appointment.",
+
         contactSmall: "WE'D LOVE TO SEE YOU",
         contactTitle: "Visit Athena Dental Clinic",
 
@@ -385,6 +393,14 @@ const translations = {
         faq2Title: "ما الخدمات التي تقدمونها؟",
         faq2Text:
             "الحشوات، علاج العصب، التقويم، التبييض، زراعة الأسنان، والمزيد.",
+
+        faq3Title: "ما مواعيد العمل؟",
+        faq3Text:
+            "من السبت إلى الأربعاء، من الساعة 5 مساءً حتى 9 مساءً.",
+
+        faq4Title: "كيف يمكنني حجز موعد؟",
+        faq4Text:
+            "يمكنك التواصل مباشرة مع عيادة أثينا لطب الأسنان عبر واتساب لحجز موعد.",
 
         contactSmall: "يسعدنا زيارتك",
         contactTitle: "زُر عيادة أثينا لطب الأسنان",
