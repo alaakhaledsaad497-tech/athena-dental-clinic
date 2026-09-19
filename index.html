@@ -2,9 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LR4R2WL8JP"></script>
-    <script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -13,6 +11,12 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LR4R2WL8JP"></script>
+
+    <!-- Basic security and sharing settings -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 
     <title>Athena Dental Clinic | Dentist in El Shorouk City</title>
 
@@ -27,6 +31,13 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="image/team.jpg">
     <meta property="og:locale" content="en_EG">
+    <meta property="og:site_name" content="Athena Dental Clinic">
+    <meta property="og:url" content="./">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Athena Dental Clinic | Dentist in El Shorouk City">
+    <meta name="twitter:description" content="Professional dental care in the 9th District of El Shorouk City, Cairo.">
+    <meta name="twitter:image" content="image/team.jpg">
+    <link rel="canonical" href="./">
 
     <meta name="theme-color" content="#fcfbf8">
 
@@ -40,7 +51,7 @@
       "description": "Dental clinic in the 9th District of El Shorouk City, Cairo.",
       "telephone": "+201020367122",
       "image": "image/team.jpg",
-      "url": "",
+      "url": "./",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "9th District, next to Dover School",
@@ -49,10 +60,65 @@
         "addressCountry": "EG"
       },
       "areaServed": "El Shorouk City",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday"
+        ],
+        "opens": "17:00",
+        "closes": "21:00"
+      },
+      "hasMap": "https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy",
       "sameAs": [
         "https://www.facebook.com/share/19tR9mSMhq/",
         "https://www.instagram.com/athena.dental",
         "https://www.tiktok.com/@athena.dental.clinic"
+      ]
+    }
+    </script>
+
+    <!-- FAQ structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where are you located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "9th District, El Shorouk City, next to Dover School."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer general, cosmetic and restorative dentistry, dental implants, root canal treatment, gum care, oral surgery, orthodontics, pediatric dentistry, emergency dentistry, full-mouth rehabilitation and digital dentistry."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are your working hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Saturday to Wednesday, from 5:00 PM to 9:00 PM."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I book an appointment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can contact Athena Dental Clinic directly on WhatsApp to arrange an appointment."
+          }
+        }
       ]
     }
     </script>
@@ -94,7 +160,7 @@
                 <a
                     href="https://wa.me/201020367122"
                     target="_blank"
-                    class="book-btn"
+                    rel="noopener noreferrer"class="book-btn"
                     data-key="bookAppointment">
                     Book Appointment
                 </a>
@@ -107,7 +173,7 @@
                 <a
                     href="https://wa.me/201020367122"
                     target="_blank"
-                    class="mobile-book-btn"
+                    rel="noopener noreferrer"class="mobile-book-btn"
                     aria-label="Book an appointment on WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
                     <span data-key="mobileBook">Book</span>
@@ -145,7 +211,7 @@
                 <a
                     href="https://wa.me/201020367122"
                     target="_blank"
-                    class="main-btn"
+                    rel="noopener noreferrer"class="main-btn"
                     data-key="heroBook">
                     Book an Appointment
                 </a>
@@ -463,7 +529,7 @@
 
                 <div class="quote">“</div>
 
-                <p data-key="review1">
+                <p>
                     الدكتورة بسنت شاطرة جدًا وبتشتغل بايد خفيفة وبتراعي راحة المريض طول الوقت.
                 </p>
 
@@ -478,7 +544,7 @@
 
                 <div class="quote">“</div>
 
-                <p data-key="review2">
+                <p>
                     Been all over different clinics for numerous years and thanks to Dr. Ahmed Okl and the crew I don't fear working out my teeth anymore.
                 </p>
 
@@ -493,7 +559,7 @@
 
                 <div class="quote">“</div>
 
-                <p data-key="review4">
+                <p>
                    It was a greatful experience with Dr Basant Teeth whitening is effectively & Doctor is friendly and make me feels comfortable
                 </p>
 
@@ -514,7 +580,8 @@
 
             <a
                 href="https://www.google.com/maps/place/Athena+Dental+Clinic/@30.1696288,31.5968089,17z/data=!4m8!3m7!1s0x14581da1da737585:0x2171a066a0948adb!8m2!3d30.1696288!4d31.5968089!9m1!1b1!16s%2Fg%2F11jzh18ktb"
-                target="_blank">
+                target="_blank"
+                    rel="noopener noreferrer">
 
                 <i class="fa-brands fa-google"></i>
 
@@ -535,55 +602,62 @@
     <section id="faq">
 
         <div class="title reveal">
-
-            <p data-key="faqSmall">
-                NEED TO KNOW
-            </p>
-
-            <h2 data-key="faqTitle">
-                Frequently Asked Questions
-            </h2>
-
+            <p data-key="faqSmall">NEED TO KNOW</p>
+            <h2 data-key="faqTitle">Frequently Asked Questions</h2>
         </div>
-
 
         <div class="faq">
 
             <div class="faq-card reveal">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-                <div>
-
-                    <h3 data-key="faq1Title">
-                        Where are you located?
-                    </h3>
-
-                    <p data-key="faq1Text">
-                        9th District, El Shorouk City, next to Dover School.
-                    </p>
-
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span class="faq-question-main">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span data-key="faq1Title">Where are you located?</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-key="faq1Text">9th District, El Shorouk City, next to Dover School.</p>
                 </div>
-
             </div>
 
+            <div class="faq-card reveal">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span class="faq-question-main">
+                        <i class="fa-solid fa-tooth"></i>
+                        <span data-key="faq2Title">What services do you offer?</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-key="faq2Text">We offer general, cosmetic and restorative dentistry, dental implants, root canal treatment, gum care, oral surgery, orthodontics, pediatric dentistry, emergency dentistry, full-mouth rehabilitation and digital dentistry.</p>
+                </div>
+            </div>
 
             <div class="faq-card reveal">
-
-                <i class="fa-solid fa-tooth"></i>
-
-                <div>
-
-                    <h3 data-key="faq2Title">
-                        What services do you offer?
-                    </h3>
-
-                    <p data-key="faq2Text">
-                        Fillings, root canal, orthodontics, whitening, implants, and more.
-                    </p>
-
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span class="faq-question-main">
+                        <i class="fa-regular fa-clock"></i>
+                        <span data-key="faq3Title">What are your working hours?</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-key="faq3Text">Saturday to Wednesday, from 5:00 PM to 9:00 PM.</p>
                 </div>
+            </div>
 
+            <div class="faq-card reveal">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span class="faq-question-main">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span data-key="faq4Title">How can I book an appointment?</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                </button>
+                <div class="faq-answer">
+                    <p data-key="faq4Text">You can contact Athena Dental Clinic directly on WhatsApp to arrange an appointment.</p>
+                </div>
             </div>
 
         </div>
@@ -608,12 +682,17 @@
                 9th District, El Shorouk City, Cairo, next to Dover School.
             </span>
 
+            <div class="contact-hours">
+                <i class="fa-regular fa-clock"></i>
+                <span data-key="contactHours">Saturday – Wednesday: 5:00 PM – 9:00 PM</span>
+            </div>
+
 
             <!-- Google Maps Location -->
             <a
                 href="https://maps.app.goo.gl/tURqvYFEUSzXCRQR9?g_st=com.google.maps.preview.copy"
                 target="_blank"
-                rel="noopener noreferrer"
+                    rel="noopener noreferrer" rel="noopener noreferrer"
                 class="location-icon"
                 aria-label="Open Athena Dental Clinic location on Google Maps"
                 title="Open Location on Google Maps">
@@ -643,7 +722,7 @@
                 <a
                     href="https://wa.me/201020367122"
                     target="_blank"
-                    aria-label="WhatsApp">
+                    rel="noopener noreferrer"aria-label="WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
 
@@ -651,7 +730,7 @@
                 <a
                     href="https://www.facebook.com/share/19tR9mSMhq/"
                     target="_blank"
-                    aria-label="Facebook">
+                    rel="noopener noreferrer"aria-label="Facebook">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
 
@@ -659,7 +738,7 @@
                 <a
                     href="https://www.instagram.com/athena.dental"
                     target="_blank"
-                    aria-label="Instagram">
+                    rel="noopener noreferrer"aria-label="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
 
@@ -667,7 +746,7 @@
                 <a
                     href="https://www.tiktok.com/@athena.dental.clinic"
                     target="_blank"
-                    aria-label="TikTok">
+                    rel="noopener noreferrer"aria-label="TikTok">
                     <i class="fa-brands fa-tiktok"></i>
                 </a>
 
@@ -693,9 +772,9 @@
                 <i class="fa-solid fa-message"></i>
             </span>
 
-            <span class="chatbot-pulse"></span>
+            <span class="chatbot-pulse" aria-hidden="true"></span>
 
-            <span class="chatbot-notification">
+            <span class="chatbot-notification" aria-hidden="true">
                 1
             </span>
 
@@ -865,6 +944,18 @@
 
                 </button>
 
+                <button
+                    type="button"
+                    data-action="hours">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span data-chat="hours">
+                        Working Hours
+                    </span>
+
+                </button>
+
             </div>
 
 
@@ -917,7 +1008,7 @@
     </footer>
 
 
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 
 </body>
 
