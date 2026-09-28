@@ -203,7 +203,7 @@ const translations = {
         doctorsText:
             "A professional team caring for your smile.",
 
-        doctor1Name: "Dr. Ahmed EL-okl",
+        doctor1Name: "Dr. Ahmed El Okl",
         doctor2Name: "Dr. Passant Refaat",
         doctor3Name: "Dr. Nourhan Tarik",
         doctor4Name: "Dr. Mohamed Mansour",
